@@ -35,7 +35,7 @@ namespace Calculator.Library
 
         private static double RechenoperationEingeben(string input)
         {
-            if (Guards.StackRangeGuard(rechner, input))
+            if (!Guards.StackRangeGuard(rechner, input))
             {
 
                 switch (input)
@@ -53,6 +53,7 @@ namespace Calculator.Library
             }
             else
             {
+                // TODO - Bug Fixen --> die beiden gehen noch nicht
                 switch (input)
                 {
                     case "^2": return Rechenoperationen.Quadrat(rechner.Pop());

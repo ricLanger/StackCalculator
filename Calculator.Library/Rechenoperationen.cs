@@ -10,16 +10,16 @@ namespace Calculator.Library
     {
         public static List<string> op = new List<string> { "+", "-", "*", "/", "^2", "sqrt", "^", "sum", "avg" };
         public static double Addition(double x, double y) => x + y;
-        public static double Subtraktion(double x, double y) => x - y;  
+        public static double Subtraktion(double x, double y) => x - y;
         public static double Multiplikation(double x, double y) => x * y;
         public static double Division(double x, double y)
         {
             if (Guards.DivisionGuard(y)) return x / y;
             else { Taschenrechner.rechner.Push(y); return x; }
-            
+
         }
         public static double Quadrat(double x) => Math.Pow(x, 2);
-        public static double Quadratwurzel (double x)
+        public static double Quadratwurzel(double x)
         {
             if (Guards.SqrtGuard(x)) return Math.Sqrt(x);
             else return x;
@@ -27,7 +27,7 @@ namespace Calculator.Library
         public static double Potenzierung(double x, double y) => Math.Pow(x, y);
         public static double SummeXElemente(int x)
         {
-            if(Guards.SumGuard(x, Taschenrechner.rechner))
+            if (Guards.SumGuard(x, Taschenrechner.rechner))
             {
                 double ergbnis = 0;
 
@@ -41,12 +41,17 @@ namespace Calculator.Library
         }
         public static double ArithmetischesMittel(int x)
         {
-            double temp = 0;
-            for (int i = 0; i < x; i++)
+            if (Guards.AvgGuard(x, Taschenrechner.rechner))
             {
-                temp += Taschenrechner.rechner.Pop();
+                double temp = 0;
+                for (int i = 0; i < x; i++)
+                {
+                    temp += Taschenrechner.rechner.Pop();
+                }
+                return temp / x;
             }
-            return temp / x;
+            else { return x; }
+
         }
 
 
