@@ -25,50 +25,46 @@ namespace Calculator.Library
             }
             else if (Guards.OpGuard(input, rechner))
             {
-                PushAndRound(RechenoperationEingeben(input));
+                PushAndRound(RechenoperationEingeben(input, rechner));
             }
 
             Starten();
         }
 
-
-
-        private static double RechenoperationEingeben(string input)
+        public static double RechenoperationEingeben(string input, Stack<double> stack)
         {
-            if (!Guards.StackRangeGuard(rechner, input))
+            if (Guards.StackRangeGuard(input, stack))
             {
-
                 switch (input)
                 {
-                    case "+": return Rechenoperationen.Addition(rechner.Pop(), rechner.Pop());
-                    case "-": return Rechenoperationen.Subtraktion(rechner.Pop(), rechner.Pop());
-                    case "*": return Rechenoperationen.Multiplikation(rechner.Pop(), rechner.Pop());
-                    case "/": return Rechenoperationen.Division(rechner.Pop(), rechner.Pop());
+                    case "+": return Rechenoperationen.Addition(stack.Pop(), stack.Pop());
+                    case "-": return Rechenoperationen.Subtraktion(stack.Pop(), stack.Pop());
+                    case "*": return Rechenoperationen.Multiplikation(stack.Pop(), stack.Pop());
+                    case "/": return Rechenoperationen.Division(stack.Pop(), stack.Pop());
 
-                    case "^": return Rechenoperationen.Potenzierung(rechner.Pop(), rechner.Pop());
-                    case "sum": return Rechenoperationen.SummeXElemente((int)rechner.Pop());
-                    case "avg": return Rechenoperationen.ArithmetischesMittel((int)rechner.Pop());
-                    default: return rechner.Pop();
+                    case "^": return Rechenoperationen.Potenzierung(stack.Pop(), stack.Pop());
+                    case "sum": return Rechenoperationen.SummeXElemente((int)stack.Pop());
+                    case "avg": return Rechenoperationen.ArithmetischesMittel((int)stack.Pop());
+                    default: return stack.Pop();
                 }
             }
             else
             {
-                // TODO - Bug Fixen --> die beiden gehen noch nicht
                 switch (input)
                 {
-                    case "^2": return Rechenoperationen.Quadrat(rechner.Pop());
-                    case "sqrt": return Rechenoperationen.Quadratwurzel(rechner.Pop());
-                    default: return rechner.Pop();
+                    case "^2": return Rechenoperationen.Quadrat(stack.Pop());
+                    case "sqrt": return Rechenoperationen.Quadratwurzel(stack.Pop());
+                    default: return stack.Pop();
                 }
             }
-           
-
+            Starten();
         }
 
         private static void PushAndRound(double zahl)
         {
             rechner.Push(Math.Round(zahl, 4));
         }
+
         private static void StackAnzeigen()
         {
             rechner.ToArray();
@@ -76,8 +72,6 @@ namespace Calculator.Library
             Console.Write("Stack: ");
             Console.WriteLine("[" + string.Join("|", rechner) + "]");
             Console.Write("Eingabe: ");
-
-
         }
     }
 }

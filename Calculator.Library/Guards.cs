@@ -17,7 +17,8 @@ namespace Calculator.Library
             }
             return true;
         }
-        public static bool DivisionGuard(double x) // nenner darf nicht null sein
+
+        public static bool DivisionGuard(double x) 
         {
             if (x == 0)
             {
@@ -26,6 +27,7 @@ namespace Calculator.Library
             }
             return true;           
         }
+
         public static bool SqrtGuard(double x)
         {
             if (x < 0)
@@ -35,6 +37,7 @@ namespace Calculator.Library
             }
             return true;           
         }
+
         public static bool SumGuard(int x, Stack<double> stack)
         {
             if (stack.Count < x)
@@ -44,6 +47,7 @@ namespace Calculator.Library
             }
             return true;            
         }
+
         public static bool OpGuard(string input, Stack<double> stack)
         {
             if (input.Length == 0)
@@ -63,20 +67,21 @@ namespace Calculator.Library
             }
             return true;
         }
-        // Guard: Bei allen Operation außer sqrt und Quadrat müssen min. 2 Zahlen im Stack sein und Stack darf nicht null sein
-        public static bool StackRangeGuard(Stack<double> stack, string input)
+        
+        public static bool StackRangeGuard( string input, Stack<double> stack)
         {
             if(stack.Count < 2 && input != "sqrt" && input != "^2")
             {
                 Console.WriteLine($"Für diese Operationen müssen min. 2 Zahlen im Stack vorhanden sein. Stacklänge: {stack.Count}");
-                Taschenrechner.Starten();
+                
+                return false;
                 
             }
             if(stack.Count >=2 && input != "sqrt" && input != "^2")
             {
-                return false;
+                return true;
             }
-            return true;
+            return false;
         }
     }
 }

@@ -8,7 +8,9 @@ namespace Calculator.Library
 {
     public class Rechenoperationen
     {
-        public static List<string> op = new List<string> { "+", "-", "*", "/", "^2", "sqrt", "^", "sum", "avg" };
+        
+        public static List<string> op = new List<string> 
+                        { "+", "-", "*", "/", "^2", "sqrt", "^", "sum", "avg" };
         public static double Addition(double x, double y) => x + y;
         public static double Subtraktion(double x, double y) => x - y;
         public static double Multiplikation(double x, double y) => x * y;
@@ -16,7 +18,6 @@ namespace Calculator.Library
         {
             if (Guards.DivisionGuard(y)) return x / y;
             else { Taschenrechner.rechner.Push(y); return x; }
-
         }
         public static double Quadrat(double x) => Math.Pow(x, 2);
         public static double Quadratwurzel(double x)
@@ -25,15 +26,15 @@ namespace Calculator.Library
             else return x;
         }
         public static double Potenzierung(double x, double y) => Math.Pow(x, y);
-        public static double SummeXElemente(int x)
+        public static double SummeXElemente(int x, Stack<double> stack)
         {
-            if (Guards.SumGuard(x, Taschenrechner.rechner))
+            if (Guards.SumGuard(x, stack))
             {
                 double ergbnis = 0;
 
                 for (int i = 0; i < x; i++)
                 {
-                    ergbnis += Taschenrechner.rechner.Pop();
+                    ergbnis += stack.Pop();
                 }
                 return ergbnis;
             }
