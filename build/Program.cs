@@ -8,6 +8,7 @@ using Cake.Common.Tools.DotNet;
 using Cake.Common.Tools.DotNet.Build;
 using Cake.Common.Tools.DotNet.Test;
 
+
 public static class Program
 {
     public static int Main(string[] args)
@@ -49,7 +50,8 @@ public sealed class BuildTask : FrostingTask<BuildContext>
         {
             Configuration = context.Config,
             Verbosity = DotNetVerbosity.Normal
-        }) ;
+
+        });
     }
 }
 
@@ -61,7 +63,11 @@ public sealed class TestClass : FrostingTask<BuildContext>
     {
         context.DotNetTest("./../Calculator.Test/Calculator.Test.csproj", new DotNetTestSettings
         {
-            Configuration = context.Config
+            Configuration = context.Config,
+            NoBuild = true,
+            ArgumentCustomization = args => args
+            .Append("--collect").AppendQuoted("Code Coverage")
+            .Append("--logger").Append("trx")
         });
     }
 }

@@ -5,6 +5,8 @@
     <RunWorkingDirectory>$(MSBuildProjectDirectory)</RunWorkingDirectory>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="Cake.Coveralls" Version="1.1.0" />
     <PackageReference Include="Cake.Frosting" Version="2.2.0" />
+    <PackageReference Include="coveralls.io" Version="1.4.2" />
   </ItemGroup>
 </Project>
