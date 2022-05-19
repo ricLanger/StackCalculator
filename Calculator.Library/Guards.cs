@@ -8,45 +8,6 @@ namespace Calculator.Library
 {
     public class Guards
     {
-        public static bool AvgGuard(int x, Stack<double> stack)
-        {
-            if (stack.Count < x)
-            {
-                Console.WriteLine($"Der gesuchte Mittelwert darf nicht größer sein als die Länge des Stacks. Stacklänge: {stack.Count}, Gesuchte Summe: {x}");
-                return false;
-            }
-            return true;
-        }
-
-        public static bool DivisionGuard(double x) 
-        {
-            if (x == 0)
-            {
-                Console.WriteLine($"Der Parameter darf nicht Null sein.Er war {x}");
-                return false;
-            }
-            return true;           
-        }
-
-        public static bool SqrtGuard(double x)
-        {
-            if (x < 0)
-            {
-                Console.WriteLine($"Der Parameter darf nicht kleiner Null sein. Er war {x}");
-                return false;
-            }
-            return true;           
-        }
-
-        public static bool SumGuard(int x, Stack<double> stack)
-        {
-            if (stack.Count < x)
-            {
-                Console.WriteLine($"Die gesuchte Summe darf nicht größer sein als die Länge des Stacks. Stacklänge: {stack.Count}, Gesuchte Summe: {x}");
-                return false;
-            }
-            return true;            
-        }
 
         public static bool OpGuard(string input, Stack<double> stack)
         {
@@ -85,3 +46,53 @@ namespace Calculator.Library
         }
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+//public static bool AvgGuard(int x, Stack<double> stack)
+//{
+//    if (stack.Count < x)
+//    {
+//        Console.WriteLine($"Der gesuchte Mittelwert darf nicht größer sein als die Länge des Stacks. Stacklänge: {stack.Count}, Gesuchte Summe: {x}");
+//        return false;
+//    }
+//    return true;
+//}
+
+//public static bool DivisionGuard(double x) 
+//{
+//    if (x == 0)
+//    {
+//        Console.WriteLine($"Der Parameter darf nicht Null sein.Er war {x}");
+//        return false;
+//    }
+//    return true;           
+//}
+
+//public static bool SqrtGuard(double x)
+//{
+//    if (x < 0)
+//    {
+//        Console.WriteLine($"Der Parameter darf nicht kleiner Null sein. Er war {x}");
+//        return false;
+//    }
+//    return true;           
+//}
+
+//public static bool SumGuard(int x, Stack<double> stack)
+//{
+//    if (stack.Count < x)
+//    {
+//        Console.WriteLine($"Die gesuchte Summe darf nicht größer sein als die Länge des Stacks. Stacklänge: {stack.Count}, Gesuchte Summe: {x}");
+//        return false;
+//    }
+//    return true;            
+//}

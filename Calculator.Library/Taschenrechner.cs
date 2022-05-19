@@ -21,11 +21,11 @@ namespace Calculator.Library
 
             if (double.TryParse(input, out zahl))
             {
-                PushAndRound(zahl);
+                PushAndRound(zahl, rechner);
             }
             else if (Guards.OpGuard(input, rechner))
             {
-                PushAndRound(RechenoperationEingeben(input, rechner));
+                PushAndRound(RechenoperationEingeben(input, rechner), rechner);
             }
 
             Starten();
@@ -43,8 +43,8 @@ namespace Calculator.Library
                     case "/": return Rechenoperationen.Division(stack.Pop(), stack.Pop());
 
                     case "^": return Rechenoperationen.Potenzierung(stack.Pop(), stack.Pop());
-                    case "sum": return Rechenoperationen.SummeXElemente((int)stack.Pop());
-                    case "avg": return Rechenoperationen.ArithmetischesMittel((int)stack.Pop());
+                    case "sum": return Rechenoperationen.SummeXElemente((int)stack.Pop(),stack);
+                    case "avg": return Rechenoperationen.ArithmetischesMittel((int)stack.Pop(), stack);
                     default: return stack.Pop();
                 }
             }
@@ -57,12 +57,13 @@ namespace Calculator.Library
                     default: return stack.Pop();
                 }
             }
-            Starten();
+            
         }
 
-        private static void PushAndRound(double zahl)
+        public static void PushAndRound(double zahl, Stack<double> stack)
         {
-            rechner.Push(Math.Round(zahl, 4));
+            stack.Push(Math.Round(zahl, 4));
+            
         }
 
         private static void StackAnzeigen()
