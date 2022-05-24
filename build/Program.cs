@@ -26,7 +26,7 @@ public class BuildContext : FrostingContext
     public BuildContext(ICakeContext context)
         : base(context)
     {
-        Config = context.Arguments.GetArgument("Configuration");
+        this.Config = context.Arguments.GetArgument("Configuration");
     }
 }
 
@@ -36,7 +36,8 @@ public sealed class CleanTask : FrostingTask<BuildContext>
     public override void Run(BuildContext context)
     {
         context.Log.Information("Clean");
-        context.CleanDirectories(".\\Test\\Calculator");
+        context.CleanDirectories(".\\Test\\Calculator" + context.Config);
+        context.CleanDirectories(".\\Test\\Calculator\\Claculator.Test\\TestResults" + context.Config);
     }
 }
 
@@ -49,7 +50,7 @@ public sealed class BuildTask : FrostingTask<BuildContext>
         context.DotNetBuild("./../Calculator.Konsole/Calculator.Konsole.csproj", new DotNetBuildSettings
         {
             Configuration = context.Config,
-            Verbosity = DotNetVerbosity.Normal
+            Verbosity = DotNetVerbosity.Normal,
 
         });
     }
@@ -67,7 +68,7 @@ public sealed class TestClass : FrostingTask<BuildContext>
             NoBuild = true,
             ArgumentCustomization = args => args
             .Append("--collect").AppendQuoted("Code Coverage")
-            .Append("--logger").Append("trx")
+            .Append("--logger").Append("trx"),
         });
     }
 }
