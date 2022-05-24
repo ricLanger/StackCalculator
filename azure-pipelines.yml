@@ -4,23 +4,29 @@
 # https://docs.microsoft.com/azure/devops/pipelines/apps/aspnet/build-aspnet-4
 
 trigger:
-- master
+- '*'
 
-pool:
-  vmImage: 'windows-latest'
+stages:
+- stage: Build
+    displayName: 'Build'
 
-variables:
-  solution: '**/*.sln'
-  buildPlatform: 'Any CPU'
-  buildConfiguration: 'Release'
-
-steps:
-- task: PowerShell@2
-   inputs:
-     filePath: 'build.ps1'
-     args: '--target=Test'
-- task: PublishCodeCoverageResults@1
-    inputs:
-      codeCoverageTool: Cobertura
-      summaryFileLocation: $(System.DefaultWorkingDirectory)/tests/**/coverage.cobertura.xml
-
+  jobs:
+  - job: buildAndTest_windows
+    pool:
+      vmImage: 'windows-latest'
+    
+    steps:
+    - task: DotNetCoreCLI@2
+      inputs:
+        command: 'custom'
+        custom: 'tool'
+        arguments: 'install -g dotnet-format --ignore-failed-sources'
+    
+    - task: PowerShell@2
+      inputs:
+        filePath: 'build.ps1'
+        args: '--target=BuildAndTest'
+    - task: PublishCodeCoverageResults@1
+      inputs:
+        codeCoverageTool: Cobertura
+        summaryFileLocation: $(System.DefaultWorkingDirectory)/tests/**/coverage.cobertura.xml
