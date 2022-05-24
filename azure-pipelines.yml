@@ -8,7 +8,7 @@ trigger:
 
 stages:
 - stage: Build
-    displayName: 'Build'
+  displayName: 'Build'
 
   jobs:
   - job: buildAndTest_windows
