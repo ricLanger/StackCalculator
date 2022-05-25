@@ -20,17 +20,10 @@ steps:
         custom: 'tool'
         arguments: 'install -g dotnet-format --ignore-failed-sources'
 
-    - task: UseDotNet@2
-      displayName: 'Use .NET Core sdk'
-      inputs:
-        packageType: sdk
-        version: 6.0.x
-        installationPath: $(Agent.ToolsDirectory)/dotnet
-
     - task: PowerShell@2
       inputs:
         filePath: 'build.ps1'
-        args: '--target=Test'
+        args: '--target=Build'
 
     - task: PublishCodeCoverageResults@1
       inputs:
