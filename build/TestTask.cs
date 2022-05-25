@@ -1,4 +1,6 @@
-﻿using Cake.Common.Build;
+﻿using System.Collections.Generic;
+
+using Cake.Common.Build;
 using Cake.Common.Tools.DotNet;
 using Cake.Common.Tools.DotNet.Test;
 using Cake.Core;
@@ -27,8 +29,12 @@ namespace Build
             context.AzurePipelines().Commands.PublishTestResults(
                 new Cake.Common.Build.AzurePipelines.Data.AzurePipelinesPublishTestResultsData
                 {
-                    TestResultsFiles = 
-                })
+                    TestResultsFiles = new List<FilePath>
+                    {
+                     context.Environment.WorkingDirectory.FullPath, "../Calculator.Test/TestResults.xml",
+                    },
+                    TestRunner = Cake.Common.Build.AzurePipelines.Data.AzurePipelinesTestRunnerType.VSTest,
+                });
         }
     }
 }
