@@ -4,9 +4,8 @@ using Cake.Core.Diagnostics;
 using Cake.Frosting;
 using Cake.Common.IO;
 using Cake.Common.Diagnostics;
-using Cake.Common.Tools.DotNet;
-using Cake.Common.Tools.DotNet.Build;
-using Cake.Common.Tools.DotNet.Test;
+
+using Cake.Common;
 
 public static class Program
 {
@@ -25,7 +24,7 @@ public class BuildContext : FrostingContext
     public BuildContext(ICakeContext context)
         : base(context)
     {
-        this.Config = context.Arguments.GetArgument("Configuration");
+        this.Config = context.Argument("Configuration", "Release");
     }
 }
 

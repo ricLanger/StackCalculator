@@ -12,6 +12,7 @@ namespace Build
         {
             context.Log.Information("Clean");
             context.CleanDirectories("../**/Calculator.Test/TestResults" + context.Config);
+            context.CleanDirectories("../**/Claculator.Konsole/bin" + context.Config);
 
         }
     }
