@@ -20,11 +20,6 @@ steps:
         custom: 'tool'
         arguments: 'install -g dotnet-format --ignore-failed-sources'
 
-    - task: UseDotNet@2
-       displayName: 'Use .NET Core SDK $(dotnetSdkVersion)'
-    inputs:
-       version: '$(dotnetSdkVersion)'
-
     - task: PowerShell@2
       inputs:
         filePath: 'build.ps1'
