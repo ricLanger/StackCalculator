@@ -33,7 +33,7 @@ steps:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
 
-- script: dotnet test "" --logger trx
+- script: dotnet test "Calculator" --logger trx
 - task: PublishTestResults@2
   condition: succeededOrFailed()
   inputs:
