@@ -15,15 +15,17 @@ stages:
     pool:
       vmImage: 'windows-latest'
     
-    steps:
-    - task: UseDotNet@2
-    displayName: 'Use .NET SDK $(dotnetSdkVersion)'
-    inputs:
-        version: '$(dotnetSdkVersion)'
+   steps:
+   - task: UseDotNet@2
+   displayName: 'Use .NET SDK $(dotnetSdkVersion)'
+   inputs:
+       version: '$(dotnetSdkVersion)'
     
-    - powershell: ./build.ps1
-        
+ - task: PowerShell@2
+      inputs:
+        filePath: 'build.ps1'
+        args: '--target=BuildAndTest'
     - task: PublishCodeCoverageResults@1
       inputs:
         codeCoverageTool: Cobertura
-        summaryFileLocation: $(System.DefaultWorkingDirectory)/Calculator.Test/TestResults**/coverage.cobertura.xml
+       summaryFileLocation: $(System.DefaultWorkingDirectory)/Calculator.Test/TestResults**/coverage.cobertura.xml
