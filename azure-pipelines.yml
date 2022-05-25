@@ -13,14 +13,23 @@ pool:
      vmImage: 'windows-latest'
     
 steps:
+    steps:
+    - task: DotNetCoreCLI@2
+      inputs:
+        command: 'custom'
+        custom: 'tool'
+        arguments: 'install -g dotnet-format --ignore-failed-sources'
+
     - task: UseDotNet@2
-        
+       displayName: 'Use .NET Core SDK $(dotnetSdkVersion)'
     inputs:
        version: '$(dotnetSdkVersion)'
 
-    - powershell: ./build.ps1
-      displayname: 'Execute Cake PowerShell Bootstrapper'
-    
+    - task: PowerShell@2
+      inputs:
+        filePath: 'build.ps1'
+        args: '--target=Test'
+
     - task: PublishCodeCoverageResults@1
       inputs:
         codeCoverageTool: Cobertura
