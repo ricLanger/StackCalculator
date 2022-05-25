@@ -20,11 +20,13 @@ namespace Build
             {
                 Configuration = context.Config,
                 NoBuild = true,
-                ArgumentCustomization = argument =>
-                {
-                    argument.Append(new TextArgument(" /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura"));
-                    return argument;
-                },
+                ArgumentCustomization = args => args
+                .Append("--collect").AppendQuoted("Code Coverage").Append("--logger").Append("trx"),
+                //ArgumentCustomization = argument =>
+                //{
+                //    argument.Append(new TextArgument(" /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura"));
+                //    return argument;
+                //},
             });
             context.AzurePipelines().Commands.PublishTestResults(
                 new Cake.Common.Build.AzurePipelines.Data.AzurePipelinesPublishTestResultsData

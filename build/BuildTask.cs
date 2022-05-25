@@ -6,6 +6,7 @@ namespace Build
 {
     [TaskName("Build")]
     [IsDependentOn(typeof(CleanTask))]
+    [IsDependentOn(typeof(RestoreTask))]
     public sealed class BuildTask : FrostingTask<BuildContext>
     {
         public override void Run(BuildContext context)

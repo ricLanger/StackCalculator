@@ -11,8 +11,8 @@ namespace Build
         public override void Run(BuildContext context)
         {
             context.Log.Information("Clean");
-            context.CleanDirectories("../**/Calculator.Test/TestResults" + context.Config);
-            context.CleanDirectories("../**/Claculator.Konsole/bin" + context.Config);
+            context.CleanDirectories("../**/Calculator.Test/TestResults");
+            //context.CleanDirectories("../**/Claculator.Konsole/bin" + context.Config);
 
         }
     }

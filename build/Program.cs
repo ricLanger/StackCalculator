@@ -2,10 +2,7 @@ using System.Threading.Tasks;
 using Cake.Core;
 using Cake.Core.Diagnostics;
 using Cake.Frosting;
-using Cake.Common.IO;
 using Cake.Common.Diagnostics;
-
-using Cake.Common;
 
 public static class Program
 {
@@ -24,7 +21,7 @@ public class BuildContext : FrostingContext
     public BuildContext(ICakeContext context)
         : base(context)
     {
-        this.Config = context.Argument("Configuration", "Release");
+        this.Config = context.Arguments.GetArgument("Configuration");
     }
 }
 
