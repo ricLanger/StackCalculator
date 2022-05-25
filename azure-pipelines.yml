@@ -7,18 +7,12 @@ trigger:
 - '*'
 
 variables:
-dotnetSdkVersion: '6.x'
+    dotnetSdkVersion: '6.x'
 
-stages:
-- stage: Build
-  displayName: 'Build'
-
-  jobs:
-  - job: buildAndTest
-    pool:
-      vmImage: 'windows-latest'
+pool:
+     vmImage: 'windows-latest'
     
-   steps:
+steps:
     - task: UseDotNet@2
     displayName: 'Use .NET SDK $(dotnetSdkVersion)'
     inputs:
