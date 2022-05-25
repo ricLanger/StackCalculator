@@ -28,12 +28,7 @@ steps:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
 
-- task: VSTest@2
-  inputs:
-    platform: '$(buildPlatform)'
-    configuration: '$(buildConfiguration)'
-
-- script: dotnet test "Calculator" --logger trx
+- script: dotnet test Calculator.Test --logger trx"
 - task: PublishTestResults@2
   condition: succeededOrFailed()
   inputs:
