@@ -32,7 +32,7 @@ namespace Calculator.Test
         [TestCase("avg", 1)]
         public void RechenoperationEingeben_ShouldWork(string input, double expected)
         {
-            double actual = Math.Round(Taschenrechner.RechenoperationEingeben(input, CreateSimpleStack()), 4);
+            double actual = Math.Round(Taschenrechner.RechenoperationDurchführen(input, CreateSimpleStack()), 4);
 
             Assert.AreEqual(expected, actual);
         }
