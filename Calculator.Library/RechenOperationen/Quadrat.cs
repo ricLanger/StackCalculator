@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Calculator.Library.RechenOperationen
 {
+    [OperationClass]
     internal class Quadrat : IOperator
     {
         public string OperatorName => "^2";
