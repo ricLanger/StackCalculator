@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 
 namespace Calculator.Library.RechenOperationen
 {
+    [OperationClass]
     internal class Subtraktion : IOperator
     {
+
         public string OperatorName => "-";
 
         public string Hilfe { get { return "'-' subtrahiert zwei Zahlen des Stacks"; } }

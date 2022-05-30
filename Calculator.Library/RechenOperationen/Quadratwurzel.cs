@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Calculator.Library.RechenOperationen
 {
+    [OperationClass]
     internal class Quadratwurzel : IOperator
     {
         public string OperatorName => "sqrt";

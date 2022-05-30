@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Reflection;
 using Calculator.Library.RechenOperationen;
 
 namespace Calculator.Library
@@ -10,27 +11,7 @@ namespace Calculator.Library
     public class Taschenrechner
     {
 
-        internal static Dictionary<string, IOperator> operators = new Dictionary<string, IOperator>();
-
-        private static void InitializeOperations()
-        {
-            IOperator addition = new Addition();
-            operators.Add(addition.OperatorName, addition);
-            IOperator subtraktion = new Subtraktion();
-            operators.Add(subtraktion.OperatorName, subtraktion);
-            IOperator multipliaktion = new Multiplikation();
-            operators.Add(multipliaktion.OperatorName, multipliaktion);
-            IOperator divison = new Divison();
-            operators.Add(divison.OperatorName, divison);
-            IOperator quadrat = new Quadrat();
-            operators.Add(quadrat.OperatorName, quadrat);
-            IOperator potenzierung = new Potenzierung();
-            operators.Add(potenzierung.OperatorName, potenzierung);
-            IOperator summe = new Summe();
-            operators.Add(summe.OperatorName, summe);
-            IOperator arithmetischesMittel = new ArithmetischesMittel();
-            operators.Add(arithmetischesMittel.OperatorName, arithmetischesMittel);
-        }
+        internal Dictionary<string, IOperator> operators = new Dictionary<string, IOperator>();
 
         public void Starten()
         {
@@ -63,6 +44,19 @@ namespace Calculator.Library
             }
         }
 
+        private void InitializeOperations()
+        {
+            var assembly = Assembly.GetExecutingAssembly();
+
+            var types = assembly.GetTypes().Where(t => t.GetCustomAttributes<OperationClassAttribute>().Count() > 0);
+
+            foreach (var type in types)
+            {
+                IOperator op = (IOperator)Activator.CreateInstance(type);
+                operators.Add(op.OperatorName, op);
+            }
+        }
+
         public bool Exit(string input)
         {
             if (input.ToLower() == "exit")
@@ -72,19 +66,19 @@ namespace Calculator.Library
             else return false;
         }
 
-        private static double RechenoperationDurchführen(string input, Stack<double> stack)
+        private double RechenoperationDurchführen(string input, Stack<double> stack)
         {
             var operation = operators[input];
             return operation.Calculate(stack);
         }
 
-        private static void PushAndRound(double zahl, Stack<double> stack)
+        private void PushAndRound(double zahl, Stack<double> stack)
         {
             stack.Push(Math.Round(zahl, 4));
 
         }
 
-        private static void StackAnzeigen(Stack<double> stack)
+        private void StackAnzeigen(Stack<double> stack)
         {
             stack.ToArray();
 
@@ -92,7 +86,8 @@ namespace Calculator.Library
             Console.WriteLine("[" + string.Join("|", stack) + "]");
 
         }
-        private static string InputEingeben()
+
+        private string InputEingeben()
         {
             Console.Write("Eingabe: ");
             var input = Console.ReadLine();
