@@ -15,7 +15,7 @@ namespace Calculator.Library.RechenOperationen
 
         public double Calculate(Stack<double> stack)
         {
-            if (stack.Peek() > stack.Count)
+            if (stack.Peek() < stack.Count)
             {
                 double ergebnis = 0;
                 int x = (int)stack.Pop();

@@ -15,7 +15,9 @@ namespace Calculator.Library.RechenOperationen
 
         public double Calculate(Stack<double> stack)
         {
-            return stack.Pop() * stack.Pop();
+            double ergebnis = stack.ElementAt(1) * stack.Pop();
+            stack.Pop();
+            return ergebnis;
         }
     }
 }

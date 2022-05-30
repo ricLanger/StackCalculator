@@ -10,7 +10,6 @@ namespace Calculator.Library
 {
     public class Taschenrechner
     {
-
         internal Dictionary<string, IOperator> operators = new Dictionary<string, IOperator>();
 
         public void Starten()
@@ -19,13 +18,11 @@ namespace Calculator.Library
 
             InitializeOperations();
 
-            var input = "";
-
             while (true)
             {
                 StackAnzeigen(stack);
 
-                input = InputEingeben();
+                var input = InputEingeben();
 
                 double zahl;
                 if (!Exit(input))
@@ -40,7 +37,6 @@ namespace Calculator.Library
                     }
                 }
                 else break;
-
             }
         }
 
@@ -75,7 +71,6 @@ namespace Calculator.Library
         private void PushAndRound(double zahl, Stack<double> stack)
         {
             stack.Push(Math.Round(zahl, 4));
-
         }
 
         private void StackAnzeigen(Stack<double> stack)
@@ -83,7 +78,7 @@ namespace Calculator.Library
             stack.ToArray();
 
             Console.Write("Stack: ");
-            Console.WriteLine("[" + string.Join("|", stack) + "]");
+            Console.WriteLine("[" + string.Join("|", stack.Reverse()) + "]");
 
         }
 
