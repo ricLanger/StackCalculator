@@ -16,7 +16,11 @@ namespace Calculator.Library.RechenOperationen
         public double Calculate(Stack<double> stack)
         {
             if (stack.Peek() != 0)
-                return stack.Pop() / stack.Pop();
+            {
+                double ergebnis = stack.ElementAt(1) / stack.Pop();
+                stack.Pop();
+                return ergebnis;
+            }
             else throw new ArgumentException("Es darf nicht durch 0 geteilt werden!");
         }
     }
