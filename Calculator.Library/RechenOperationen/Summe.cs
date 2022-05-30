@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Calculator.Library.RechenOperationen
 {
-    internal class Summe : Bedingungen, IOperator
+    internal class Summe : IOperator
     {
         public string OperatorName => "sum";
 
@@ -14,9 +14,6 @@ namespace Calculator.Library.RechenOperationen
 
         public double Calculate(Stack<double> stack)
         {
-            CheckObStackGrößerEinsIst(stack);
-
-           
             if (stack.Peek() > stack.Count)
             {
                 double ergebnis = 0;
@@ -30,9 +27,7 @@ namespace Calculator.Library.RechenOperationen
             else
             {
                 throw new ArgumentException($"Die gesuchte Summe darf nicht größer sein als die Länge des Stacks. Stacklänge: {stack.Count - 1}, Gesuchte Summe: {stack.Peek()}");
-            }
-
-            
+            }        
         }
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Calculator.Library.RechenOperationen
 {
-    internal class Subtraktion :Bedingungen, IOperator
+    internal class Subtraktion : IOperator
     {
         public string OperatorName => "-";
 
@@ -14,8 +14,6 @@ namespace Calculator.Library.RechenOperationen
 
         public double Calculate(Stack<double> stack)
         {
-            CheckObStackGrößerEinsIst(stack);
-
             return stack.Pop() - stack.Pop();
         }
     }

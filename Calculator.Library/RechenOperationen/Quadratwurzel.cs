@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Calculator.Library.RechenOperationen
 {
-    internal class Quadratwurzel : Bedingungen, IOperator
+    internal class Quadratwurzel : IOperator
     {
         public string OperatorName => "sqrt";
 
@@ -14,8 +14,6 @@ namespace Calculator.Library.RechenOperationen
 
         public double Calculate(Stack<double> stack)
         {
-            CheckObStackGrößerNullIst(stack);
-
             if (stack.Peek() >= 0)
                 return Math.Sqrt(stack.Pop());
             else throw new ArgumentException("Nicht durch eine negative Zahl die Wurzel ziehen");

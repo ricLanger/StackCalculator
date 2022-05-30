@@ -9,10 +9,8 @@ namespace Calculator.Library
 {
     public class Taschenrechner
     {
-        
-        internal static Dictionary<string, IOperator> operators = new Dictionary<string, IOperator>();
 
-        private static Stack<double> stack = new Stack<double>();
+        internal static Dictionary<string, IOperator> operators = new Dictionary<string, IOperator>();
 
         private static void InitializeOperations()
         {
@@ -34,49 +32,66 @@ namespace Calculator.Library
             operators.Add(arithmetischesMittel.OperatorName, arithmetischesMittel);
         }
 
-        public static void Starten()
+        public void Starten()
         {
+            Stack<double> stack = new();
+
             InitializeOperations();
 
-            while (true) // Abbruchbedingung hinzufügen
-            {
-                StackAnzeigen();
+            var input = "";
 
-                var input = InputEingeben() ;
+            while (true)
+            {
+                StackAnzeigen(stack);
+
+                input = InputEingeben();
 
                 double zahl;
+                if (!Exit(input))
+                {
+                    if (double.TryParse(input, out zahl))
+                    {
+                        stack.Push(zahl);
+                    }
+                    else
+                    {
+                        PushAndRound(RechenoperationDurchführen(input, stack), stack);
+                    }
+                }
+                else break;
 
-                if (double.TryParse(input, out zahl))
-                {
-                    stack.Push(zahl);
-                }          
-                else 
-                {
-                    PushAndRound(RechenoperationDurchführen(input, stack), stack);
-                }           
             }
         }
 
+        public bool Exit(string input)
+        {
+            if (input.ToLower() == "exit")
+            {
+                return true;
+            }
+            else return false;
+        }
 
-        public static double RechenoperationDurchführen(string input, Stack<double> stack)
+        private static double RechenoperationDurchführen(string input, Stack<double> stack)
         {
             var operation = operators[input];
             return operation.Calculate(stack);
         }
 
-        public static void PushAndRound(double zahl, Stack<double> stack)
+        private static void PushAndRound(double zahl, Stack<double> stack)
         {
             stack.Push(Math.Round(zahl, 4));
 
         }
 
-        private static void StackAnzeigen()
+        private static void StackAnzeigen(Stack<double> stack)
         {
             stack.ToArray();
 
             Console.Write("Stack: ");
-            Console.WriteLine("[" + string.Join("|", stack) + "]");            
-        }       
+            Console.WriteLine("[" + string.Join("|", stack) + "]");
+
+        }
         private static string InputEingeben()
         {
             Console.Write("Eingabe: ");
@@ -85,3 +100,4 @@ namespace Calculator.Library
         }
     }
 }
+;

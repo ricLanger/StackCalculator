@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Calculator.Library.RechenOperationen
 {
-    internal class ArithmetischesMittel : Bedingungen, IOperator
+    internal class ArithmetischesMittel : IOperator
     {
         public string OperatorName => "avg";
 
@@ -14,8 +14,6 @@ namespace Calculator.Library.RechenOperationen
 
         public double Calculate(Stack<double> stack)
         {
-            CheckObStackGrößerEinsIst(stack);
-
             double temp = 0;
             int x = (int)stack.Pop();
             for (int i = 0; i < x; i++)

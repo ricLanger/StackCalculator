@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Calculator.Library.RechenOperationen
 {
-    internal class Divison : Bedingungen, IOperator
+    internal class Divison : IOperator
     {
         public string OperatorName => "/";
 
@@ -14,8 +14,6 @@ namespace Calculator.Library.RechenOperationen
 
         public double Calculate(Stack<double> stack)
         {
-            CheckObStackGrößerEinsIst(stack);
-
             if (stack.Peek() != 0)
                 return stack.Pop() / stack.Pop();
             else throw new ArgumentException("Es darf nicht durch 0 geteilt werden!");
