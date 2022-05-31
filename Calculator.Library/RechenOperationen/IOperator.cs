@@ -1,6 +1,6 @@
-﻿namespace Calculator.Library.RechenOperationen
+namespace Calculator.Library.RechenOperationen
 {
-    internal interface IOperator
+    public interface IOperator
     {
         public string OperatorName { get; }
         public string Hilfe { get; }

@@ -1,39 +1,51 @@
-﻿using NUnit.Framework;
-using FluentAssertions;
-using Calculator.Library;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Calculator.Library;
+using Calculator.Library.RechenOperationen;
+using NUnit.Framework;
 
 namespace Calculator.Test
 {
     [TestFixture]
-    public class TaschenrechnerTests : TestStacks
+    internal class TaschenrechnerTests : CreateStacks
     {
+        
         [Test]
-        [TestCase("1.98235", 1.9824)]
-        [TestCase("-5.86431", -5.8643)]
-        [TestCase("0.00004", 0)]
-        [TestCase("0.00009", 0.0001)]
-        public void PushAndRound_ShouldWork(double input, double expcted)
+        public void TestAdditionCalculation()
         {
-            Taschenrechner.PushAndRound(input, CreateSimpleStack());
-            Taschenrechner.PushAndRound(input, CreateEmptyStack());
+            IOperator op = new Addition();
+            double expected = 5;
+            double actual = op.Calculate(CreateSimpleStack());
+            Assert.AreEqual(expected, actual);
         }
 
         [Test]
-        [TestCase("+", 5)]
-        [TestCase("-", 1)]
-        [TestCase("*", 6)]
-        [TestCase("/", 1.5)]
-        [TestCase("^2", 9)]
-        [TestCase("sqrt", 1.7321)]
-        [TestCase("^", 9)]
-        [TestCase("sum", 3)]
-        [TestCase("avg", 1)]
-        public void RechenoperationEingeben_ShouldWork(string input, double expected)
+        public void TestSubtraktionCalculation()
         {
-            double actual = Math.Round(Taschenrechner.RechenoperationDurchführen(input, CreateSimpleStack()), 4);
+            IOperator op = new Subtraktion();
+            double expected = -1;
+            double actual = op.Calculate(CreateSimpleStack());
+            Assert.AreEqual(expected, actual);
+        }
 
+        [Test]
+        public void TestMultiplikationCalculation()
+        {
+            IOperator op = new Multiplikation();
+            double expected = 6;
+            double actual = op.Calculate(CreateSimpleStack());
+            Assert.AreEqual(expected, actual);
+        }
+
+        [Test]
+        public void TestDivisionCalculation()
+        {
+            IOperator op = new Divison();
+            double expected = 0.6667;
+            double actual = op.Calculate(CreateSimpleStack());
             Assert.AreEqual(expected, actual);
         }
     }

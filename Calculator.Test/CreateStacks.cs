@@ -7,10 +7,10 @@ using System.Collections.Generic;
 namespace Calculator.Test
 {
     [TestFixture]
-    public class TestStacks
+    public class CreateStacks
     {
         //static Stack<double> stack = new Stack<double>();    
-        protected Stack<double> CreateSimpleStack()
+        public static Stack<double> CreateSimpleStack()
         {
             Stack<double> stack = new ();
             stack.Push(0);

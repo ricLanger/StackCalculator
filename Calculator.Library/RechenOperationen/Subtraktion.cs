@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Calculator.Library.RechenOperationen
 {
     [OperationClass]
-    internal class Subtraktion : IOperator
+    public class Subtraktion : IOperator
     {
 
         public string OperatorName => "-";
