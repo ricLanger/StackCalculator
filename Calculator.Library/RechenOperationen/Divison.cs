@@ -23,5 +23,10 @@ namespace Calculator.Library.RechenOperationen
             }
             else throw new ArgumentException("Es darf nicht durch 0 geteilt werden!");
         }
+
+        public void CalculateConditions(Stack<double> stack)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

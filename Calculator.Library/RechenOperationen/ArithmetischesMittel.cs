@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,6 +15,8 @@ namespace Calculator.Library.RechenOperationen
 
         public double Calculate(Stack<double> stack)
         {
+            CalculateConditions(stack);
+
             double temp = 0;
             int x = (int)stack.Pop();
             for (int i = 0; i < x; i++)
@@ -22,6 +24,18 @@ namespace Calculator.Library.RechenOperationen
                 temp += stack.Pop();
             }
             return temp / x;
+        }
+
+        public void CalculateConditions(Stack<double> stack)
+        {
+            if (stack.Count < 1)
+            {
+                throw new ArgumentException("Stackgröße darf nicht kleiner gleich 1 sein!");
+            }
+            if (stack.Peek() >= stack.Count)
+            {
+                throw new ArgumentException("Gesuchte Summe darf nicht größer gleich der Stackgröße sein!");
+            }
         }
     }
     }

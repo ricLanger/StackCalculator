@@ -19,5 +19,10 @@ namespace Calculator.Library.RechenOperationen
             stack.Pop();
             return ergebnis;
         }
+
+        public void CalculateConditions(Stack<double> stack)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,6 +16,11 @@ namespace Calculator.Library.RechenOperationen
         public double Calculate(Stack<double> stack)
         { 
             return Math.Pow(stack.Pop(), 2);
+        }
+
+        public void CalculateConditions(Stack<double> stack)
+        {
+            throw new NotImplementedException();
         }
     }
 }
