@@ -15,6 +15,8 @@ namespace Calculator.Library.RechenOperationen
 
         public double Calculate(Stack<double> stack)
         {
+            CalculateConditions(stack);
+
             double ergebnis = Math.Pow(stack.ElementAt(1), stack.Pop());
             stack.Pop();
             return ergebnis;
@@ -22,7 +24,10 @@ namespace Calculator.Library.RechenOperationen
 
         public void CalculateConditions(Stack<double> stack)
         {
-            throw new NotImplementedException();
+            if (stack.Count < 1)
+            {
+                throw new ArgumentException("Stackgröße darf nicht kleiner gleich 1 sein!");
+            }
         }
     }
 }

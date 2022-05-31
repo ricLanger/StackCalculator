@@ -15,14 +15,21 @@ namespace Calculator.Library.RechenOperationen
 
         public double Calculate(Stack<double> stack)
         {
-            if (stack.Peek() >= 0)
-                return Math.Sqrt(stack.Pop());
-            else throw new ArgumentException("Nicht durch eine negative Zahl die Wurzel ziehen");
+            CalculateConditions(stack);
+            return Math.Sqrt(stack.Pop());
+
         }
 
         public void CalculateConditions(Stack<double> stack)
         {
-            throw new NotImplementedException();
+            if (stack.Count < 0)
+            {
+                throw new ArgumentException("Stackgröße darf nicht leer sein!");
+            }
+            if (stack.Peek() < 0)
+            {
+                throw new ArgumentException("Nicht durch eine negative Zahl die Wurzel ziehen");
+            }
         }
     }
 }

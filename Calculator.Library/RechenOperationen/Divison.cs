@@ -15,18 +15,24 @@ namespace Calculator.Library.RechenOperationen
 
         public double Calculate(Stack<double> stack)
         {
-            if (stack.Peek() != 0)
-            {
-                double ergebnis = stack.ElementAt(1) / stack.Pop();
-                stack.Pop();
-                return ergebnis;
-            }
-            else throw new ArgumentException("Es darf nicht durch 0 geteilt werden!");
+            CalculateConditions(stack);
+
+            double ergebnis = stack.ElementAt(1) / stack.Pop();
+            stack.Pop();
+            return ergebnis;
+
         }
 
         public void CalculateConditions(Stack<double> stack)
         {
-            throw new NotImplementedException();
+            if (stack.Count < 1)
+            {
+                throw new ArgumentException("Stackgröße darf nicht kleiner gleich 1 sein!");
+            }
+            if (stack.Peek() == 0)
+            {
+                throw new ArgumentException("Es darf nicht durch 0 geteilt werden!");
+            }
         }
     }
 }

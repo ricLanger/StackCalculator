@@ -7,20 +7,24 @@ using System.Threading.Tasks;
 namespace Calculator.Library.RechenOperationen
 {
     [OperationClass]
-    internal class Quadrat : IOperator
+    public class Quadrat : IOperator
     {
         public string OperatorName => "^2";
 
         public string Hilfe => "'^2' quadriert die oberste Zahl des Stacks";
 
         public double Calculate(Stack<double> stack)
-        { 
+        {
+            CalculateConditions(stack);
+
             return Math.Pow(stack.Pop(), 2);
         }
-
-        public void CalculateConditions(Stack<double> stack)
+        private void CalculateConditions(Stack<double> stack)
         {
-            throw new NotImplementedException();
+            if (stack.Count < 0)
+            {
+                throw new ArgumentException("Stackgröße darf nicht leer sein!");
+            }
         }
     }
 }

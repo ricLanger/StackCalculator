@@ -15,25 +15,26 @@ namespace Calculator.Library.RechenOperationen
 
         public double Calculate(Stack<double> stack)
         {
-            if (stack.Peek() < stack.Count)
-            {
-                double ergebnis = 0;
-                int x = (int)stack.Pop();
-                for (int i = 0; i < x; i++)
-                {
-                    ergebnis += stack.Pop();
-                }
-                return ergebnis;
-            }
-            else
-            {
-                throw new ArgumentException($"Die gesuchte Summe darf nicht größer sein als die Länge des Stacks. Stacklänge: {stack.Count - 1}, Gesuchte Summe: {stack.Peek()}");
-            }        
-        }
+            CalculateConditions(stack);
 
+            double ergebnis = 0;
+            int x = (int)stack.Pop();
+            for (int i = 0; i < x; i++)
+            {
+                ergebnis += stack.Pop();
+            }
+            return ergebnis;
+        }
         public void CalculateConditions(Stack<double> stack)
         {
-            throw new NotImplementedException();
+            if (stack.Count < 1)
+            {
+                throw new ArgumentException("Stackgröße darf nicht kleiner gleich 1 sein!");
+            }
+            if (stack.Peek() >= stack.Count)
+            {
+                throw new ArgumentException("Gesuchte Summe darf nicht größer gleich der Stackgröße sein!");
+            }
         }
     }
 }
