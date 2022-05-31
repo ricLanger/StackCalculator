@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -29,6 +29,11 @@ namespace Calculator.Library.RechenOperationen
             {
                 throw new ArgumentException($"Die gesuchte Summe darf nicht größer sein als die Länge des Stacks. Stacklänge: {stack.Count - 1}, Gesuchte Summe: {stack.Peek()}");
             }        
+        }
+
+        public void CalculateConditions(Stack<double> stack)
+        {
+            throw new NotImplementedException();
         }
     }
 }

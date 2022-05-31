@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,6 +18,11 @@ namespace Calculator.Library.RechenOperationen
             if (stack.Peek() >= 0)
                 return Math.Sqrt(stack.Pop());
             else throw new ArgumentException("Nicht durch eine negative Zahl die Wurzel ziehen");
+        }
+
+        public void CalculateConditions(Stack<double> stack)
+        {
+            throw new NotImplementedException();
         }
     }
 }
